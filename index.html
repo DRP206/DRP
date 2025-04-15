@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprendre à Coder Pierre-Feuille-Ciseaux en JavaScript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #ff6b6b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        .navbar-brand {
+            font-weight: 900;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+        }
+        .step-card {
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        .code-container {
+            background: #282c34;
+            color: #abb2bf;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .live-demo {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .game-btn {
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">DRP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#concept">Concept</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#etapes">Étapes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#code">Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demo">Démo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center mb-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Pierre-Feuille-Ciseaux en JavaScript</h1>
+            <p class="lead mb-4">Apprenez à coder un jeu classique en suivant ce tutoriel étape par étape</p>
+            <a href="#etapes" class="btn btn-light btn-lg px-4 me-2">Commencer</a>
+            <a href="#demo" class="btn btn-outline-light btn-lg px-4">Voir la Démo</a>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Le Concept du Jeu</h2>
+                    <p>Pierre-Feuille-Ciseaux est un jeu de main populaire où :</p>
+                    <ul class="mb-4">
+                        <li>La <strong>Pierre</strong> bat les <strong>Ciseaux</strong> (les casse)</li>
+                        <li>Les <strong>Ciseaux</strong> battent la <strong>Feuille</strong> (la coupent)</li>
+                        <li>La <strong>Feuille</strong> bat la <strong>Pierre</strong> (l'enveloppe)</li>
+                    </ul>
+                    <p>Dans cette version numérique, vous jouerez contre l'ordinateur qui fera des choix aléatoires.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Rock-paper-scissors.svg/1200px-Rock-paper-scissors.svg.png" alt="Schéma Pierre-Feuille-Ciseaux" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Étapes Section -->
+    <section id="etapes" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Étapes de Développement</h2>
+            
+            <!-- Étape 1 -->
+            <div class="card mb-4 step-card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="me-4 text-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="fs-4">1</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Structure HTML de base</h3>
+                            <p>Créez la structure HTML qui contiendra notre jeu :</p>
+                            <div class="code-container">
+                                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Pierre-Feuille-Ciseaux&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="game-container"&gt;
+        &lt;h1&gt;Pierre-Feuille-Ciseaux&lt;/h1&gt;
+        &lt;div class="choices"&gt;
+            &lt;button id="pierre"&gt;Pierre&lt;/button&gt;
+            &lt;button id="feuille"&gt;Feuille&lt;/button&gt;
+            &lt;button id="ciseaux"&gt;Ciseaux&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id="resultat"&gt;&lt;/div&gt;
+        &lt;div id="scores"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="card mb-4 step-card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="me-4 text-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="fs-4">2</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Stylisation avec CSS</h3>
+                            <p>Ajoutez du style à votre jeu :</p>
+                            <div class="code-container">
+                                <pre><code class="language-css">body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.game-container {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.choices button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.choices button:hover {
+    background-color: #3a5a80;
+    transform: scale(1.05);
+}
+
+#resultat {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#scores {
+    font-size: 18px;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="card mb-4 step-card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="me-4 text-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="fs-4">3</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Logique du jeu en JavaScript</h3>
+                            <p>Implémentez la logique principale dans script.js :</p>
+                            <div class="code-container">
+                                <pre><code class="language-javascript">// Variables pour stocker les scores
+let scoreJoueur = 0;
+let scoreOrdinateur = 0;
+
+// Récupération des éléments du DOM
+const pierreBtn = document.getElementById('pierre');
+const feuilleBtn = document.getElementById('feuille');
+const ciseauxBtn = document.getElementById('ciseaux');
+const resultatDiv = document.getElementById('resultat');
+const scoresDiv = document.getElementById('scores');
+
+// Fonction pour le choix aléatoire de l'ordinateur
+function choixOrdinateur() {
+    const choix = ['pierre', 'feuille', 'ciseaux'];
+    const randomIndex = Math.floor(Math.random() * 3);
+    return choix[randomIndex];
+}
+
+// Fonction pour déterminer le gagnant
+function determinerGagnant(choixJoueur, choixOrdinateur) {
+    if (choixJoueur === choixOrdinateur) {
+        return 'Égalité !';
+    }
+
+    if (
+        (choixJoueur === 'pierre' && choixOrdinateur === 'ciseaux') ||
+        (choixJoueur === 'feuille' && choixOrdinateur === 'pierre') ||
+        (choixJoueur === 'ciseaux' && choixOrdinateur === 'feuille')
+    ) {
+        scoreJoueur++;
+        return 'Vous gagnez !';
+    } else {
+        scoreOrdinateur++;
+        return 'L\'ordinateur gagne !';
+    }
+}
+
+// Gestion des clics sur les boutons
+pierreBtn.addEventListener('click', () => jouer('pierre'));
+feuilleBtn.addEventListener('click', () => jouer('feuille'));
+ciseauxBtn.addEventListener('click', () => jouer('ciseaux'));
+
+// Fonction principale du jeu
+function jouer(choixJoueur) {
+    const choixOrdi = choixOrdinateur();
+    const resultat = determinerGagnant(choixJoueur, choixOrdi);
+    
+    resultatDiv.textContent = `Vous: ${choixJoueur} | Ordinateur: ${choixOrdi}. ${resultat}`;
+    scoresDiv.textContent = `Score: Vous ${scoreJoueur} - ${scoreOrdinateur} Ordinateur`;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 4 -->
+            <div class="card mb-4 step-card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="me-4 text-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <span class="fs-4">4</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Améliorations possibles</h3>
+                            <p>Quelques idées pour améliorer votre jeu :</p>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5>Animations</h5>
+                                            <p>Ajoutez des animations CSS pour les choix et les résultats.</p>
+                                            <pre class="code-container"><code class="language-css">@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+    animation: shake 0.3s ease-in-out;
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5>Effets sonores</h5>
+                                            <p>Intégrez des sons pour chaque action.</p>
+                                            <pre class="code-container"><code class="language-javascript">function jouerSon(type) {
+    const son = new Audio(`sounds/${type}.mp3`);
+    son.play();
+}
+
+// Appeler dans la fonction jouer()
+jouerSon(choixJoueur);</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Complet Section -->
+    <section id="code" class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Code Complet</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-dark text-white">
+                            <h4>index.html</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <pre class="code-container m-0"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Pierre-Feuille-Ciseaux&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="game-container"&gt;
+        &lt;h1&gt;Pierre-Feuille-Ciseaux&lt;/h1&gt;
+        &lt;div class="choices"&gt;
+            &lt;button id="pierre"&gt;Pierre&lt;/button&gt;
+            &lt;button id="feuille"&gt;Feuille&lt;/button&gt;
+            &lt;button id="ciseaux"&gt;Ciseaux&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id="resultat"&gt;&lt;/div&gt;
+        &lt;div id="scores"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-dark text-white">
+                            <h4>script.js</h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <pre class="code-container m-0"><code class="language-javascript">// Variables pour stocker les scores
+let scoreJoueur = 0;
+let scoreOrdinateur = 0;
+
+// Récupération des éléments du DOM
+const pierreBtn = document.getElementById('pierre');
+const feuilleBtn = document.getElementById('feuille');
+const ciseauxBtn = document.getElementById('ciseaux');
+const resultatDiv = document.getElementById('resultat');
+const scoresDiv = document.getElementById('scores');
+
+// Fonction pour le choix aléatoire de l'ordinateur
+function choixOrdinateur() {
+    const choix = ['pierre', 'feuille', 'ciseaux'];
+    const randomIndex = Math.floor(Math.random() * 3);
+    return choix[randomIndex];
+}
+
+// Fonction pour déterminer le gagnant
+function determinerGagnant(choixJoueur, choixOrdinateur) {
+    if (choixJoueur === choixOrdinateur) {
+        return 'Égalité !';
+    }
+
+    if (
+        (choixJoueur === 'pierre' && choixOrdinateur === 'ciseaux') ||
+        (choixJoueur === 'feuille' && choixOrdinateur === 'pierre') ||
+        (choixJoueur === 'ciseaux' && choixOrdinateur === 'feuille')
+    ) {
+        scoreJoueur++;
+        return 'Vous gagnez !';
+    } else {
+        scoreOrdinateur++;
+        return 'L\'ordinateur gagne !';
+    }
+}
+
+// Gestion des clics sur les boutons
+pierreBtn.addEventListener('click', () => jouer('pierre'));
+feuilleBtn.addEventListener('click', () => jouer('feuille'));
+ciseauxBtn.addEventListener('click', () => jouer('ciseaux'));
+
+// Fonction principale du jeu
+function jouer(choixJoueur) {
+    const choixOrdi = choixOrdinateur();
+    const resultat = determinerGagnant(choixJoueur, choixOrdi);
+    
+    resultatDiv.textContent = `Vous: ${choixJoueur} | Ordinateur: ${choixOrdi}. ${resultat}`;
+    scoresDiv.textContent = `Score: Vous ${scoreJoueur} - ${scoreOrdinateur} Ordinateur`;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary btn-lg px-4">Télécharger les fichiers complets</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Démo Section -->
+    <section id="demo" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Démonstration Live</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="live-demo">
+                        <h3 class="text-center mb-4">Jouez à Pierre-Feuille-Ciseaux</h3>
+                        <div class="choices text-center">
+                            <button id="demo-pierre" class="btn btn-primary game-btn">Pierre</button>
+                            <button id="demo-feuille" class="btn btn-success game-btn">Feuille</button>
+                            <button id="demo-ciseaux" class="btn btn-info game-btn">Ciseaux</button>
+                        </div>
+                        <div id="demo-resultat" class="mt-4 p-3 bg-white rounded text-center fs-5"></div>
+                        <div id="demo-scores" class="mt-3 text-center fs-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>Créé avec ❤️ par DISSO ROCHER</p>
+            <p class="mb-0">© 2025 Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Code pour la démo live
+        let demoScoreJoueur = 0;
+        let demoScoreOrdinateur = 0;
+
+        const pierreDemo = document.getElementById('demo-pierre');
+        const feuilleDemo = document.getElementById('demo-feuille');
+        const ciseauxDemo = document.getElementById('demo-ciseaux');
+        const resultatDemo = document.getElementById('demo-resultat');
+        const scoresDemo = document.getElementById('demo-scores');
+
+        function demoChoixOrdinateur() {
+            const choix = ['pierre', 'feuille', 'ciseaux'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choix[randomIndex];
+        }
+
+        function demoDeterminerGagnant(choixJoueur, choixOrdinateur) {
+            if (choixJoueur === choixOrdinateur) {
+                return 'Égalité !';
+            }
+
+            if (
+                (choixJoueur === 'pierre' && choixOrdinateur === 'ciseaux') ||
+                (choixJoueur === 'feuille' && choixOrdinateur === 'pierre') ||
+                (choixJoueur === 'ciseaux' && choixOrdinateur === 'feuille')
+            ) {
+                demoScoreJoueur++;
+                return 'Vous gagnez !';
+            } else {
+                demoScoreOrdinateur++;
+                return 'L\'ordinateur gagne !';
+            }
+        }
+
+        pierreDemo.addEventListener('click', () => demoJouer('pierre'));
+        feuilleDemo.addEventListener('click', () => demoJouer('feuille'));
+        ciseauxDemo.addEventListener('click', () => demoJouer('ciseaux'));
+
+        function demoJouer(choixJoueur) {
+            const choixOrdi = demoChoixOrdinateur();
+            const resultat = demoDeterminerGagnant(choixJoueur, choixOrdi);
+            
+            resultatDemo.textContent = `Vous: ${choixJoueur} | Ordinateur: ${choixOrdi}. ${resultat}`;
+            scoresDemo.textContent = `Score: Vous ${demoScoreJoueur} - ${demoScoreOrdinateur} Ordinateur`;
+        }
+    </script>
+</body>
+</html>
